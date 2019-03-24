@@ -14,6 +14,11 @@ export default class Message extends React.Component {
                     title="演示调用函数2017"
                     onPress={foo(23)}
                 />
+
+                <Button
+                    title="Go to MainScreen"
+                    onPress={() => this.props.navigation.navigate('MainScreen')}
+                />
             </View>
         );
     }
