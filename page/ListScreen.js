@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Image, FlatList, TouchableHighlight, StyleSheet, Text, View} from 'react-native';
 
 
-import Profile from './ProfileScreen.js';
+import Profile from '../ProfileScreen.js';
 
 var REQUEST_URL =
     "https://raw.githubusercontent.com/facebook/react-native/0.51-stable/docs/MoviesExample.json";

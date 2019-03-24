@@ -1,7 +1,7 @@
 /** @format */
 
 import {AppRegistry} from 'react-native';
-import Welcome from './welcome';
+import Home from './tabNavigator/HomeCityPage';
 import {name as appName} from './app.json';
 
-AppRegistry.registerComponent(appName, () => Welcome);
+AppRegistry.registerComponent(appName, () => Home);

@@ -5,7 +5,7 @@ import { createAppContainer, createStackNavigator } from 'react-navigation'; // 
 import HomeScreen from './page/HomeScreen'
 import DetailsScreen from  './page/DetailsScreen'
 
-import MoveListPage from  './ListScreen'
+import MoveListPage from './page/ListScreen'
 
 
 //创建页面导航器

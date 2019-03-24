@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, View, Text } from 'react-native';
+import {Button, View, Text, StyleSheet} from 'react-native';
 import { Alert } from 'react-native'
 
 
@@ -7,6 +7,15 @@ import { createAppContainer, createStackNavigator } from 'react-navigation'; // 
 
 
 export default class HomeScreen extends React.Component {
+
+     static navigationOptions = (props) =>{
+         return {
+             title: '本页面演示StackNavigator',
+             headerTitleStyle:styles.headerTitleStyle,
+         };
+     };
+
+
     render() {
         return (
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -32,4 +41,11 @@ export default class HomeScreen extends React.Component {
 
 const foo = function(a) {
     console.log('26---------foo function calling', a)
-}
+};
+
+const styles = StyleSheet.create({
+    headerTitleStyle: {
+        fontSize: 12,
+        color: '#a45678',
+    },
+});
