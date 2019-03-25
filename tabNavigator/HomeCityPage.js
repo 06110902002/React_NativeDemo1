@@ -91,6 +91,13 @@ const BottomTabNavigator = createBottomTabNavigator({
                 headerTitleStyle: {
                     fontWeight: 'normal',
                 },
+                tabBarIcon: ({focused, tintColor}) => (
+                    <Image
+                        source={focused ? require('../imgs/main_store_passred.png') : require('../imgs/main_store_normal.png')}
+                        style={styles.tabIconStyle}
+                    />
+
+                ),
             },
         },
     ),
