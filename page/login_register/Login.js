@@ -1,6 +1,8 @@
 
 import React from 'react';
-import {Button, View, Text, StyleSheet,Image,TextInput,TouchableOpacity} from 'react-native';
+import {Button, View, Text, StyleSheet,
+    Image,TextInput,ListView,
+    TouchableOpacity} from 'react-native';
 import { Alert } from 'react-native'
 
 const cellPhoneInputId = 23;
@@ -192,7 +194,7 @@ export default class Login extends React.Component {
     };
 
     login(){
-        console.log('166----------login:'+this.state.cellPhoneText);
+        console.log('166----------login:'+this.test());
         Alert.alert(this.state.cellPhoneText +":"+this.state.passwardText);
     };
 
