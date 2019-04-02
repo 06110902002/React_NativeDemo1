@@ -20,7 +20,6 @@ export default class RefreshFooter extends Component {
   render() {
     let {state} = this.props;
     let footer = null;
-    console.log('23----------:'+state);
     switch (state) {
       case RefreshState.Idle:
         // Idle情况下为null，不显示尾部组件

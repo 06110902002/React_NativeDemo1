@@ -15,6 +15,11 @@ import {
 
 import RefreshListView from './Refresh/RefreshListView';
 import RefreshState from './Refresh/RefreshState';
+import ItemViewMgr from "./Refresh/view/ItemViewMgr";
+import TitleModel from "./Refresh/model/TitleModel";
+import ModelType from "./Refresh/model/ModelType";
+import BaseModel from "./Refresh/model/BaseModel";
+import UniversityModel from "./Refresh/model/UniversityModel";
 
 var data = {
     "result": [
@@ -37,7 +42,10 @@ var data = {
     ]
 };
 const CITY_NAMES = ['北京', '上海', '广州','杭州', '苏州'];
+var testArray = [];
+
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+
 export default class ListViewTest extends Component<Props> {
     constructor(props) {
         super(props);
@@ -48,10 +56,31 @@ export default class ListViewTest extends Component<Props> {
             dataSource: ds.cloneWithRows(data.result),//data.result为模拟的数据或服务端得到的数据
             isLoading: true,
             noMoreData:false,
-            dataArray: CITY_NAMES//初始数据
+            dataArray: this.initData(),//CITY_NAMES//初始数据
         }
         this.onLoad()
     }
+
+
+    initData(){
+
+        for(let i = 0 ; i < 5; i++){
+            if( i % 2 === 0){
+                var title = new TitleModel();
+                title.titleContent = 'title_'+i;
+                testArray.push(title);
+            }else{
+                var university = new UniversityModel();
+                university.universityName = '清华大学';
+                university.place = '北京';
+                testArray.push(university);
+            }
+
+        }
+        return testArray;
+    };
+
+
 
     componentDidMount() {
         this.listView.beginHeaderRefresh();
@@ -106,20 +135,11 @@ export default class ListViewTest extends Component<Props> {
                 <RefreshListView
                     ref={(ref) => {this.listView = ref}}
                     data={this.state.dataArray}
-                    renderItem={this._renderItem}
-                    keyExtractor={(item) => item.id}
+                    renderItem={this._renderItem.bind(this)}
                     ListEmptyComponent={this._renderEmptyView}
                     onHeaderRefresh={() => { this.pullDownRefresh() }}
                     onFooterRefresh={() => { this.loadMore() }}
                 />
-
-                <View style={styles.clickButtonStyle}>
-                    <Button title={"删除"} color={'white'} onPress={()=>this.deleteData()}/>
-                </View>
-
-                <View style={styles.clickButtonStyle}>
-                    <Button title={"增加"} color={'white'} onPress={()=>this.addData()}/>
-                </View>
 
             </View>
         );
@@ -145,13 +165,20 @@ export default class ListViewTest extends Component<Props> {
         </View>
     };
 
-    _renderItem= (data)=> {//自定义的渲染组件
-        return <View style={styles.item}>
-            <Text syle={styles.text}>{data.item}</Text>
-        </View>
+    _renderItem= (data)=> {
+        return (
+            <ItemViewMgr
+                itemType = {data.item.getItemType()}
+                ItemData = {data.item}      //属性传值
+                onItemClickListener = {(itemData) =>this.onClickListener(itemData)}
+            />
+        )
+
     };
 
-
+    onClickListener(itemData){
+        Alert.alert(itemData.universityName);
+    };
 
 
 
@@ -224,7 +251,7 @@ export default class ListViewTest extends Component<Props> {
         },()=>{
 
             setTimeout(() => {
-                this.listView.endRefreshing(RefreshState.CanLoadMore);
+                this.listView.endRefreshing(RefreshState.Idle);
                 console.log('226-----------:下拉刷新');
             }, 2000)
 
@@ -289,5 +316,16 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         borderWidth: 0.5,
         borderColor: '#7FFF00',
+    },
+    item: {
+        backgroundColor: '#c5ecff',
+        height: 50,
+        marginRight: 15,
+        marginLeft: 15,
+        marginBottom: 15,
+        alignItems: 'center',
+        justifyContent: 'center',
+        elevation:5,//漂浮的效果
+        borderRadius:5,//圆角
     },
 });

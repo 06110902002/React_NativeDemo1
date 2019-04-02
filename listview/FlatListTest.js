@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
     },
     item: {
         backgroundColor: '#c5ecff',
-        height: 50,
+        height: 250,
         marginRight: 15,
         marginLeft: 15,
         marginBottom: 15,
@@ -147,6 +147,7 @@ const styles = StyleSheet.create({
     text: {
         color: 'white',
         fontSize: 20,
+        backgroundColor:'#90bc45',
     },
     indicatorContainer: {
         alignItems: 'center'
